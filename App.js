@@ -88,29 +88,24 @@ export default function App() {
               }
             </View>
 
-            <View>
               <TouchableOpacity onPress={() => movimentar (0, -20)} >
                 <text>Cima</text>
               </TouchableOpacity>
 
-            </View>
             <View>
               <TouchableOpacity onPress={() => movimentar (20, 0)} >
                 <text>Esquerda</text>
               </TouchableOpacity>
-            </View>
 
-            <View>
-              <TouchableOpacity onPress={() => movimentar (0, 20)} >
-                <text>Baixo</text>
-              </TouchableOpacity>
-            </View>
-
-            <View>
               <TouchableOpacity onPress={() => movimentar (-20, 0)} >
                 <text>Direita</text>
               </TouchableOpacity>
             </View>
+
+              <TouchableOpacity onPress={() => movimentar (0, 20)} >
+                <text>Baixo</text>
+              </TouchableOpacity>
+            
         </View>
       );
     }
