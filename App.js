@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native
 import { useState, useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 
-const socket = io ('https://squarewebsocketbackend.onrender.com'), {
+const socket = io ('https://squarewebsocketbackend.onrender.com', {
   transports: ['websocket']
-}
+});
 
 
 
@@ -61,9 +61,10 @@ export default function App() {
 
     if (entrou == false) {
       return (
-          <View>
+          <View style={styles.centralizar}>
             <Text>Digite seu nome:</Text>
             <TextInput
+              style={styles.input}
               value={nome}
               onChangeText={(novoTexto) => setNome(novoTexto)}
             >
@@ -76,12 +77,19 @@ export default function App() {
     }
     else{
       return(
-        <View>
-
-            <View>
+        <View style={styles.areaGlobal}>
+            <View style={areaJogo}>
               {
                 usuarios.map(usurario => (
                     <View>
+                      style={[
+                        styles.player,
+                        {
+                          left: usurario.x,
+                          top: usuario.y,
+                          backgroundColor: usuario.id ==
+                        }
+                      ]}
                       <Text>{usuarios.nome}</Text>
                     </View>
                 ))
@@ -110,3 +118,41 @@ export default function App() {
       );
     }
 }
+
+
+  const styles = StyleSheet.create({
+  centralizar: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  input: {
+    borderWidth: 1,
+    width: 200,
+    margin: 10,
+    padding: 5
+  },
+  areaGlobal: {
+    flex: 1
+  },
+  areaJogo: {
+    flex: 1,
+    backgroundColor: "#EEEEEE"
+  },
+  player: {
+    position: "absolute",
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  controles: {
+    alignItems: "center",
+    padding: 20
+  },
+  esquerdaDireita: {
+    flexDirection: "row",
+    width: 200,
+    justifyContent: "space-between"
+  }
+});
