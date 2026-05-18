@@ -12,7 +12,7 @@ const socket = io ('https://squarewebsocketbackend.onrender.com'), {
 export default function App() {
 
   const [nome, setNome] = useState('');
-  const [entrou, setEntrou] = useState('false');
+  const [entrou, setEntrou] = useState(''false'');
   const [usuarios, setUsuarios] = useState([]);
   const [id, setId] = useState(null);
 
@@ -32,6 +32,16 @@ export default function App() {
 
   }, []);
 
+    function entrouGameRoom(){
+      if (!nome){
+        return;
+      }
+
+      socket.emit("join", nome);
+      setEntrou(true);
+    }
+
+
     if (entrou == false) {
       return (
           <View>
@@ -41,8 +51,8 @@ export default function App() {
               onChangeText={(novoTexto) => setNome(novoTexto)}
             >
             </TextInput>
-            <TouchableOpacity>
-              <Text onPress>Entrar</Text>
+            <TouchableOpacity onPress={entrouGameRoom}>
+              <Text>Entrar</Text>
             </TouchableOpacity>
           </View>
         );
@@ -50,8 +60,21 @@ export default function App() {
     else{
       return(
         <View>
-        </View
+            <View>
+              {
+                usuarios.map(usurario => (
+                    <View>
+                      <Text>{usuarios.nome}</Text>
+                    </View>
+                ))
+              }
+            <View/>
+
+            <View>
+
+            </View>
+
+        </View>
       );
     }
-  
 }
