@@ -87,7 +87,7 @@ export default function App() {
                         {
                           left: usurario.x,
                           top: usuario.y,
-                          backgroundColor: usuario.id ==
+                          backgroundColor: usuario.id == id ? "green" : "blue"
                         }
                       ]}
                       <Text>{usuarios.nome}</Text>
