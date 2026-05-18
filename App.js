@@ -12,7 +12,7 @@ const socket = io ('https://squarewebsocketbackend.onrender.com'), {
 export default function App() {
 
   const [nome, setNome] = useState('');
-  const [entrou, setEntrou] = useState(''false'');
+  const [entrou, setEntrou] = useState('false');
   const [usuarios, setUsuarios] = useState([]);
   const [id, setId] = useState(null);
 
@@ -41,6 +41,23 @@ export default function App() {
       setEntrou(true);
     }
 
+    function movimentar(dx, dy){
+      const usuario = usuarios.find(user => user.id ==id);
+
+      if(!usuario){
+        console.log("Usuário não encontrado");
+        return;
+      }
+
+      socket.emit("move", {
+        x: usurario.x + dx,
+        y: usurario.y + dy
+      })
+    }
+    
+
+
+
 
     if (entrou == false) {
       return (
@@ -60,6 +77,7 @@ export default function App() {
     else{
       return(
         <View>
+
             <View>
               {
                 usuarios.map(usurario => (
@@ -68,12 +86,31 @@ export default function App() {
                     </View>
                 ))
               }
-            <View/>
-
-            <View>
-
             </View>
 
+            <View>
+              <TouchableOpacity onPress={() => movimentar (0, -20)} >
+                <text>Cima</text>
+              </TouchableOpacity>
+
+            </View>
+            <View>
+              <TouchableOpacity onPress={() => movimentar (20, 0)} >
+                <text>Esquerda</text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <TouchableOpacity onPress={() => movimentar (0, 20)} >
+                <text>Baixo</text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <TouchableOpacity onPress={() => movimentar (-20, 0)} >
+                <text>Direita</text>
+              </TouchableOpacity>
+            </View>
         </View>
       );
     }
