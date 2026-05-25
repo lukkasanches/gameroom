@@ -78,42 +78,43 @@ export default function App() {
     else{
       return(
         <View style={styles.areaGlobal}>
-            <View style={areaJogo}>
+            <View style={styles.areaJogo}>
               {
-                usuarios.map(usurario => (
-                    <View>
+                usuarios.map(usuario => (
+                    <View
                       style={[
                         styles.player,
                         {
-                          left: usurario.x,
+                          left: usuario.x,
                           top: usuario.y,
                           backgroundColor: usuario.id == id ? "green" : "blue"
                         }
                       ]}
+                      >
                       <Text>{usuarios.nome}</Text>
                     </View>
                 ))
               }
             </View>
-
+            <View style={styles.controles}>
               <TouchableOpacity onPress={() => movimentar (0, -20)} >
-                <text>Cima</text>
+                <Text>Cima</Text>
               </TouchableOpacity>
 
-            <View>
+            <View style={styles.esquerdaDireita}>
               <TouchableOpacity onPress={() => movimentar (20, 0)} >
-                <text>Esquerda</text>
+                <Text>Esquerda</Text>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => movimentar (-20, 0)} >
-                <text>Direita</text>
+                <Text>Direita</Text>
               </TouchableOpacity>
             </View>
 
               <TouchableOpacity onPress={() => movimentar (0, 20)} >
-                <text>Baixo</text>
+                <Text>Baixo</Text>
               </TouchableOpacity>
-            
+            </View>
         </View>
       );
     }
